@@ -3,20 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <title>Beer Clicker</title>
-    <link href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/bootstrap.min.css" type="text/css">
+    <link rel="stylesheet" href="css/game.css" type="text/css">
 </head>
 <body>
 
-<main>
+<main class="m-4">
 
     <h2>Money: €<span id="cashText">0</span></h2>
 
-    <button onclick="buyBeer()">Sell a beer</button>
+    <button class="btn btn-primary" onclick="buyBeer()">Sell a beer</button>
 
-    <p>
-        Bartenders: <span id="numberBartendersText">0</span>
-        <button onclick="hireBartender()">Hire a bartender</button>
-    </p>
+<!--    <p>-->
+<!--        Bartenders: <span id="numberBartendersText">0</span>-->
+<!--        <button onclick="hireBartender()">Hire a bartender</button>-->
+<!--    </p>-->
+
+    <h3>Business:</h3>
+    <div id="mainGame"></div>
 
     <p><small>Game has been running for <span id="gameAgeText">0</span> seconds</small></p>
 

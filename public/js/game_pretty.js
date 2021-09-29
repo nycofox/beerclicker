@@ -28,17 +28,26 @@ let business = [
 ];
 
 function businessCost(id) {
-    return Number(business[id][1]);
-    if(!businessAmount[id]) {
-        return business[id][1];
-    }
-    return businessAmount[id] * business[id][1] * 1.15;
+    return (id + 2) * (id + 1) * (id + 1) * (businessAmount[id] + 1);
 }
 
 function buyBeer(amount = 1)  {
     cash += beerCurrentPrice;
     cashTotal += beerCurrentPrice;
     beerSoldAmount += amount;
+}
+
+function buyBusiness() {
+    console.log("BUY " + this.id)
+
+    if (cash >= businessCost(this.id)) {
+        cash -= businessCost(this.id);
+        businessAmount[this.id]++;
+
+        document.getElementById("amount" + this.id).innerHTML = businessAmount[this.id];
+
+        document.getElementById("cost" + this.id).innerHTML = "$" + businessCost(this.id);
+    }
 }
 
 function setBusiness() {
@@ -60,11 +69,11 @@ function setBusiness() {
 
         let button = document.createElement('button');
         button.type = "button";
-        button.className = "btn btn-primary"
+        button.className = "btn btn-primary btn-sm"
         button.id = i;
         button.value = 'Buy'
-        button.innerHTML = 'Buy (€' + businessCost(i) + ')'
-        // button.onclick = buyBusiness;
+        button.innerHTML = 'Buy 1 (€' + businessCost(i) + ')'
+        button.onclick = buyBusiness;
 
         let description = document.createElement('span')
         description.className = "small"

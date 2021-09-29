@@ -10,28 +10,30 @@
 </head>
 <body>
 
-<main class="m-4">
+<main>
+    <div class="container">
+        <h2>Money: €<span id="cashText">0</span></h2>
+        <h5 class="mb-4">Total money earned: €<span id="cashTotalText">0</span></h5>
+        <h2 class="mb-4">Beers sold: <span id="beerSoldAmountText">0</span></h2>
 
-    <h2>Money: €<span id="cashText">0</span></h2>
-    <h5 class="mb-4">Total money earned: €<span id="cashTotalText">0</span></h5>
-    <h2 class="mb-4">Beers sold: <span id="beerSoldAmountText">0</span></h2>
+        <button class="btn btn-primary btn-sm" onclick="buyBeer()" id="sellBeerText"></button>
 
-    <button class="btn btn-primary" onclick="buyBeer()" id="sellBeerText"></button>
+        <h3 class="my-4">Business:</h3>
+        <div id="mainBusiness"></div>
 
-<!--    <p>-->
-<!--        Bartenders: <span id="numberBartendersText">0</span>-->
-<!--        <button onclick="hireBartender()">Hire a bartender</button>-->
-<!--    </p>-->
+        <h3 class="my-4">Upgrades:</h3>
+        <div id="mainUpgrades"></div>
 
-    <h3 class="my-4">Business:</h3>
-    <div id="mainBusiness"></div>
-
-    <h3 class="my-4">Upgrades:</h3>
-    <div id="mainUpgrades"></div>
-
-    <p><small>Game has been running for <span id="gameAgeText">0</span> seconds</small></p>
-
-    <p><small>Version: <span id="gameVersionText">0</span></small></p>
+    </div>
+    <footer class="text-center text-lg-start bg-light text-muted">
+        <div class="container">
+            <div class="d-flex justify-content-between py-4">
+                <small>Game has been running for <span id="gameAgeText">0</span> seconds</small>
+                <span>BeerClicker</span>
+                <small>Version: <span id="gameVersionText">0</span></small>
+            </div>
+        </div>
+    </footer>
 
 </main>
 

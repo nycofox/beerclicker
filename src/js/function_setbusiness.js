@@ -17,11 +17,11 @@ function setBusiness() {
 
         let button = document.createElement('button');
         button.type = "button";
-        button.className = "btn btn-primary"
+        button.className = "btn btn-primary btn-sm"
         button.id = i;
         button.value = 'Buy'
-        button.innerHTML = 'Buy (€' + businessCost(i) + ')'
-        // button.onclick = buyBusiness;
+        button.innerHTML = 'Buy 1 (€' + businessCost(i) + ')'
+        button.onclick = buyBusiness;
 
         let description = document.createElement('span')
         description.className = "small"

@@ -1,4 +1,5 @@
 let cash=0;
+let clicks=0;
 let cashTotal=0;
 let beerSoldAmount = 0; // Number of beers sold
 let beerBasePrice = 2; // Base income per beer

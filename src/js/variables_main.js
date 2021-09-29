@@ -1,0 +1,9 @@
+let cash=0;
+let cashTotal=0;
+let beerSoldAmount = 0; // Number of beers sold
+let beerBasePrice = 2; // Base income per beer
+let beerCurrentPrice = 2;
+let gameAge = 0; // Age of game, in seconds
+let interval = 15; // Updates per second
+let increasePerLevel = 0.15;
+let businessAmount = [];

@@ -8,12 +8,13 @@ let interval = 15; // Updates per second
 let increasePerLevel = 0.15;
 let numberBartenders=0;
 
-// Businesses [name, base cost, beers per second, description]
+// Businesses [name, base cost, increase per level, beers per second, description]
 const business = [
-    ["Bartenders", 100, 1, "Bartenders will sell beers for you"],
-    ["Mixologists", 5000, 2, ""],
-    ["Pubs", 10000, 10, ""],
-    ["Night Clubs", 100000, 30, ""]
+    ["Bartenders", 100, 1.1, 1, "Bartenders will sell beers for you"],
+    ["Mixologists", 5000, 1.15, 2, ""],
+    ["Beer truck", 8000, 1.15, 4, "Beer trucks will hunt for vic...customers in the neighborhood"],
+    ["Pubs", 10000, 1.15, 10, ""],
+    ["Night Clubs", 100000, 1.15, 30, ""]
 ];
 
 let businessAmount = [];
@@ -54,6 +55,7 @@ function setBusiness() {
         let div = document.createElement('div');
         div.className = "mb-2";
         div.id = business[i][0];
+        div.title = business[i][4];
         div.innerHTML = business[i][0];
 
         let amount = document.createElement('span');
@@ -70,7 +72,7 @@ function setBusiness() {
 
         let description = document.createElement('span')
         description.className = "small"
-        description.innerHTML = business[i][3];
+        description.innerHTML = business[i][4];
 
         div.appendChild(amount);
         div.appendChild(button);

@@ -6,19 +6,19 @@ const uglifycss = require('gulp-uglifycss');
 
 const destDir = './public/js/';
 // const tempDir = './temp/'
-const tempDir = './public/js/'
+const tempDir = './public/js/' // Revert to the temp directory above before release
 
-gulp.task('js-uglify', function () {
+gulp.task('compile', function () {
     return gulp.src([
         './src/js/variables_*.js',
         './src/js/definitions_*.js',
         './src/js/function_*.js',
         './src/js/update_*.js',
         './src/js/main.js'
-    ]) //Use wildcards to select all files in a particular folder or be specific
-        .pipe(gulp_concat('game_pretty.js')) //this will concat all the files into concat.js
-        .pipe(gulp.dest(tempDir)) //this will save concat.js in a temp directory defined above
-        .pipe(gulp_rename('game.js')) //this will rename concat.js to uglify.js
-        .pipe(gulp_uglify()) //this will uglify/minify uglify.js
-        .pipe(gulp.dest(destDir)); //this will save uglify.js into destination Directory defined above
+    ])
+        .pipe(gulp_concat('game_pretty.js')) //this will concat all the files
+        .pipe(gulp.dest(tempDir)) //this will save game_pretty.js in a temp directory defined above
+        .pipe(gulp_rename('game.js')) //this will rename game_pretty.js to game.js
+        .pipe(gulp_uglify()) //this will uglify/minify game.js
+        .pipe(gulp.dest(destDir)); //this will save game.js into destination Directory defined above
 });

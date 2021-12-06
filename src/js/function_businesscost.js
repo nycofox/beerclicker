@@ -1,3 +1,5 @@
 function businessCost(id) {
-    return (id + 2) * (id + 1) * (id + 1) * (businessAmount[id] + 1);
+    // return 100 * business[id][0];
+    // return business[id][2] * (businessAmount[id] + 1);
+    return 1;
 }

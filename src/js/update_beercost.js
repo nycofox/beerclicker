@@ -1,4 +1,7 @@
 function updateBeerCost()
 {
-    sellBeerText.innerHTML = "Sell a beer (€" + beerCurrentPrice + ")"
+    price = beerCurrentPrice;
+
+    sellBeerText.innerHTML = "Sell a beer (€" + price + ")"
+    beerPriceText.innerHTML = price;
 }

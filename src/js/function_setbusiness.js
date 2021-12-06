@@ -5,31 +5,36 @@ function setBusiness() {
     for(i = 0 ; i < business.length; i++) {
         businessAmount.push(0);
 
-        let div = document.createElement('div');
-        div.className = "mb-2";
-        div.id = business[i][0];
-        div.title = business[i][4];
-        div.innerHTML = business[i][0];
+        let row = document.createElement("tr")
 
-        let amount = document.createElement('span');
-        amount.id = "amount" + i;
+        let name = document.createElement("th");
+        name.scope = "row"
+        name.id = business[i][0];
+        name.title = business[i][5];
+        name.innerHTML = business[i][1];
+
+        let amount = document.createElement("td");
+        amount.id = "amount" + business[i][0];
         amount.innerHTML = "0";
 
-        let button = document.createElement('button');
+        let action = document.createElement("td");
+
+        let button = document.createElement("button");
         button.type = "button";
-        button.className = "btn btn-primary btn-sm"
-        button.id = i;
-        button.value = 'Buy'
-        button.innerHTML = 'Buy 1 (€' + businessCost(i) + ')'
-        button.onclick = buyBusiness;
+        button.className = "btn btn-primary btn-sm";
+        button.id = "buybutton" + business[i][0];
+        button.value = 'Buy';
+        button.onclick = buyBusiness(business[i]);
+        button.innerHTML = business[i][6] + ' 1 (€' + business[i][2] + ')';
+        // button.innerHTML = business[i][6] + ' 1 (€' + businessCost(business[i][0]) + ')';
 
-        let description = document.createElement('span')
-        description.className = "small"
-        description.innerHTML = business[i][4];
+        let beerspersecond = document.createElement("td");
 
-        div.appendChild(amount);
-        div.appendChild(button);
-        div.appendChild(description);
-        mainBusiness.appendChild(div);
+        row.appendChild(name);
+        row.appendChild(amount);
+        row.appendChild(action);
+        row.appendChild(beerspersecond);
+        action.appendChild(button);
+        businessTable.appendChild(row);
     }
 }

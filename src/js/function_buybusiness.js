@@ -1,12 +1,19 @@
-function buyBusiness() {
-    console.log("BUY " + this.id)
+/**
+ * Purchases a new business
+ * Checks for available money first
+ */
+function buyBusiness(id) {
+    console.log("BUY " + id)
 
-    if (cash >= businessCost(this.id)) {
-        cash -= businessCost(this.id);
-        businessAmount[this.id]++;
+    if (cash >= businessCost(id)) {
+        cash -= businessCost(id);
+        businessAmount[id]++;
 
-        document.getElementById("amount" + this.id).innerHTML = businessAmount[this.id];
+        document.getElementById("amount" + id).innerHTML = businessAmount[id];
 
-        document.getElementById("cost" + this.id).innerHTML = "$" + businessCost(this.id);
+        document.getElementById("cost" + id).innerHTML = businessCost(id);
+
+        document.getElementById("button" + id).innerHTML = business[i][6] + ' 1 (€' + businessCost(business[i][0]) + ')';
+
     }
 }

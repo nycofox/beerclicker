@@ -16,10 +16,23 @@
         <h5 class="mb-4">Total money earned: €<span id="cashTotalText">0</span></h5>
         <h2 class="mb-4">Beers sold: <span id="beerSoldAmountText">0</span></h2>
 
+        <h3>Current price for a beer: €<span id="beerPriceText"></span></h3>
+
         <button class="btn btn-primary btn-sm" onclick="buyBeer()" id="sellBeerText"></button>
 
         <h3 class="my-4">Business:</h3>
         <div id="mainBusiness"></div>
+        <table class="table">
+            <thead>
+            <tr>
+                <th scope="col">Business</th>
+                <th scope="col">Amount</th>
+                <th scope="col">Action</th>
+                <th scope="col">Beers per second</th>
+            </tr>
+            </thead>
+            <tbody id="businessTable"></tbody>
+        </table>
 
         <h3 class="my-4">Upgrades:</h3>
         <div id="mainUpgrades"></div>

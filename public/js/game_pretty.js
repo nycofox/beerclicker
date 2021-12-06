@@ -6,10 +6,9 @@ let beerBasePrice = 2; // Base income per beer
 let beerCurrentPrice = 2;
 let gameAge = 0; // Age of game, in seconds
 let interval = 15; // Updates per second
-let increasePerLevel = 0.15;
 let businessAmount = [];
 
-let version = "0.1";
+let version = "0.0.2";
 
 /*
  0  id
@@ -18,18 +17,22 @@ let version = "0.1";
  3  Increase per level
  4  Base beers per second
  5  Tooltip
+ 6  Buy/Hire
  */
 
 let business = [
-    ["Bartenders", 100, 1.1, 1, "Bartenders will sell beers for you"],
-    ["Mixologists", 5000, 1.15, 2, ""],
-    ["Beer truck", 8000, 1.15, 4, "Beer trucks will hunt for vic...customers in the neighborhood"],
-    ["Pubs", 10000, 1.15, 10, ""],
-    ["Night Clubs", 100000, 1.15, 30, ""]
+    [10, "Auto-brewer", 100, 1.1, 0.2, "Some sort of thingamajig that brews beer for you", "Buy"],
+    [20, "Bartenders", 100, 1.1, 0.5, "Bartenders will sell beers for you", "Hire"],
+    [30, "Mixologists", 5000, 1.15, 1, "", "Hire"],
+    [40, "Beer truck", 8000, 1.15, 4, "Beer trucks will hunt for vic...customers in the neighborhood", "Buy"],
+    [50, "Pubs", 10000, 1.15, 10, "", "Buy"],
+    [60, "Night Clubs", 100000, 1.15, 30, "", "Buy"]
 ];
 
 function businessCost(id) {
-    return (id + 2) * (id + 1) * (id + 1) * (businessAmount[id] + 1);
+    // return 100 * business[id][0];
+    // return business[id][2] * (businessAmount[id] + 1);
+    return 1;
 }
 
 function buyBeer(amount = 1)  {
@@ -39,16 +42,23 @@ function buyBeer(amount = 1)  {
     clicks++;
 }
 
-function buyBusiness() {
-    console.log("BUY " + this.id)
+/**
+ * Purchases a new business
+ * Checks for available money first
+ */
+function buyBusiness(id) {
+    console.log("BUY " + id)
 
-    if (cash >= businessCost(this.id)) {
-        cash -= businessCost(this.id);
-        businessAmount[this.id]++;
+    if (cash >= businessCost(id)) {
+        cash -= businessCost(id);
+        businessAmount[id]++;
 
-        document.getElementById("amount" + this.id).innerHTML = businessAmount[this.id];
+        document.getElementById("amount" + id).innerHTML = businessAmount[id];
 
-        document.getElementById("cost" + this.id).innerHTML = "$" + businessCost(this.id);
+        document.getElementById("cost" + id).innerHTML = businessCost(id);
+
+        document.getElementById("button" + id).innerHTML = business[i][6] + ' 1 (€' + businessCost(business[i][0]) + ')';
+
     }
 }
 
@@ -59,38 +69,46 @@ function setBusiness() {
     for(i = 0 ; i < business.length; i++) {
         businessAmount.push(0);
 
-        let div = document.createElement('div');
-        div.className = "mb-2";
-        div.id = business[i][0];
-        div.title = business[i][4];
-        div.innerHTML = business[i][0];
+        let row = document.createElement("tr")
 
-        let amount = document.createElement('span');
-        amount.id = "amount" + i;
+        let name = document.createElement("th");
+        name.scope = "row"
+        name.id = business[i][0];
+        name.title = business[i][5];
+        name.innerHTML = business[i][1];
+
+        let amount = document.createElement("td");
+        amount.id = "amount" + business[i][0];
         amount.innerHTML = "0";
 
-        let button = document.createElement('button');
+        let action = document.createElement("td");
+
+        let button = document.createElement("button");
         button.type = "button";
-        button.className = "btn btn-primary btn-sm"
-        button.id = i;
-        button.value = 'Buy'
-        button.innerHTML = 'Buy 1 (€' + businessCost(i) + ')'
-        button.onclick = buyBusiness;
+        button.className = "btn btn-primary btn-sm";
+        button.id = "buybutton" + business[i][0];
+        button.value = 'Buy';
+        button.onclick = buyBusiness(business[i]);
+        button.innerHTML = business[i][6] + ' 1 (€' + business[i][2] + ')';
+        // button.innerHTML = business[i][6] + ' 1 (€' + businessCost(business[i][0]) + ')';
 
-        let description = document.createElement('span')
-        description.className = "small"
-        description.innerHTML = business[i][4];
+        let beerspersecond = document.createElement("td");
 
-        div.appendChild(amount);
-        div.appendChild(button);
-        div.appendChild(description);
-        mainBusiness.appendChild(div);
+        row.appendChild(name);
+        row.appendChild(amount);
+        row.appendChild(action);
+        row.appendChild(beerspersecond);
+        action.appendChild(button);
+        businessTable.appendChild(row);
     }
 }
 
 function updateBeerCost()
 {
-    sellBeerText.innerHTML = "Sell a beer (€" + beerCurrentPrice + ")"
+    price = beerCurrentPrice;
+
+    sellBeerText.innerHTML = "Sell a beer (€" + price + ")"
+    beerPriceText.innerHTML = price;
 }
 
 function updateStatus() {
@@ -102,18 +120,26 @@ function updateStatus() {
 }
 
 /**
- * Tick runs once p
+ * Tick runs x times per second, set by variable "interval"
  */
 function updateTick() {
     cashText.innerHTML = cash.toFixed(2).toLocaleString();
     cashTotalText.innerHTML = cashTotal.toFixed(2).toLocaleString();
     beerSoldAmountText.innerHTML = beerSoldAmount;
 
-    for(i = 0; i < business.length; i++) {
-        increase = (businessAmount[i] * business[i][2] * beerCurrentPrice) / interval;
+    for (i = 0; i < business.length; i++) {
+        increase = (businessAmount[i] * business[i][4] * beerCurrentPrice) / interval;
         cash += increase;
         cashTotal += increase;
+
+        // setBusiness();
+        // updateBusinessCosts(business[i])
+
     }
+}
+
+function updateBusinessCosts(id) {
+
 }
 
 function startUp() {
